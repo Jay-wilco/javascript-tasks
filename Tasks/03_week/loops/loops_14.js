@@ -8,3 +8,10 @@ Write a function named createWordPyramid:
     cod
     code
  */
+
+const createWordPyramid = (word) => {
+  for (let i = 0; i <= word.length; i++) {
+    console.log(word.slice(0, i));
+  }
+};
+createWordPyramid("amatoori");

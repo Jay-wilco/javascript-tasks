@@ -8,6 +8,23 @@ Write a function named sumAndAverage:
 Display all results in the console.
 */
 
-const sumAndAverage = () => {
-  let sum = 0;
-};
+function sumAndAverage() {
+  let sum = 0,
+    min = Infinity,
+    max = -Infinity;
+  for (let i = 0; i < 10; i++) {
+    let num = parseFloat(prompt("Enter a number:"));
+    console.log(num);
+
+    sum += num;
+    if (num < min) {
+      min = num;
+    }
+    if (num > max) {
+      max = num;
+    }
+  }
+  console.log(`Sum: ${sum}, Average: ${sum / 10}, Min: ${min}, Max: ${max}`);
+}
+
+sumAndAverage();

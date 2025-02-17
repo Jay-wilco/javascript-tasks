@@ -6,22 +6,15 @@ Write a function named askToContinue:
 - If the user answers "n", stop asking and log the average of all entered numbers in the console. 
 */
 
-const askToContinue = () => {
-  let count = 0;
-  let sum = 0;
-
-  while (true) {
-    let input = Number(prompt("Enter a number:"));
-  }
-
-  sum += input;
-  count++;
-
-  let answer = prompt("Do you want to continue giving numbers? (y/n)");
-
-    if (answer === "n") {
-      break;
-    }
-};
+function askToContinue() {
+  let sum = 0,
+    count = 0;
+  do {
+    let num = parseFloat(prompt("Enter a number:"));
+    sum += num;
+    count++;
+  } while (prompt("Do you want to continue? (y/n)").toLowerCase() === "y");
+  console.log(`Average: ${sum / count}`);
+}
 
 askToContinue();

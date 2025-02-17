@@ -7,3 +7,25 @@ Write a function named findMinMax:
 - The largest number.
 Display the results in the console. 
 */
+
+function findMinMax() {
+  let count = parseInt(prompt("How many numbers?"));
+  console.log("You chose " + count + " numbers");
+
+  let min = Infinity,
+    max = -Infinity;
+  for (let i = 0; i < count; i++) {
+    let num = parseFloat(prompt("Enter a number:"));
+    console.log(num);
+
+    if (num < min) {
+      min = num;
+    }
+    if (num > max) {
+      max = num;
+    }
+  }
+  console.log(`Smallest: ${min}, Largest: ${max}`);
+}
+
+findMinMax();

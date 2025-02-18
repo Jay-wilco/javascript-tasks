@@ -16,4 +16,7 @@ week_03:
 week_04
 [x] ATM_simulator
 [x] DOM tasks
-[ ] Pancake
+[x] Pancake
+Week_05
+[x] Arrays 1, 2 
+[ ] pancake pt.2

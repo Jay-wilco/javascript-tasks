@@ -61,19 +61,19 @@ Test `createBook` by creating a new book object with user-provided input and l"o
 
 // Your code here
 
-function createBook(title, author, yearPublished, genres) {
-  let book = new book(title, author, yearPublished, genres);
+// function createBook(title, author, yearPublished, genres) {
+//   let book = new book(title, author, yearPublished, genres);
 
-  return book;
-}
-const createNewBook = createBook("The New Book", "Unknown author", 2026, [
-  "scifi",
-  "Tragedy",
-]);
+//   return book;
+// }
+// const createNewBook = createBook("The New Book", "Unknown author", 2026, [
+//   "scifi",
+//   "Tragedy",
+// ]);
 
-library.push(...Book);
+// library.push(...Book);
 
-console.log(library);
+// console.log(library);
 
 /* Task 6
 Convert the `library` collection to a JSON string and log it to the console.
@@ -162,11 +162,18 @@ Write a function `findOldestCar` that takes an array of car objects and returns 
 
 // Your code here
 
-// car.forEach((car.year) => {
+function findOldestCar(car) {
+  let oldestCar = car[0];
 
-// });
+  for (let i = 1; i < car.length; i++) {
+    if (car[i].year < oldestCar.year) {
+      oldestCar = car[i];
+    }
+  }
+  return oldestCar;
+}
 
-// console.log(findOldestCar);
+console.log("Oldest car in the list is: ", findOldestCar(car));
 
 /* Task 11
 Define a `userProfiles` array containing objects representing users.
@@ -176,12 +183,68 @@ Write a function that filters and returns only the users who are administrators.
 
 // Your code here
 
+const userProfiles = [
+  { username: "Maisa", email: "Maisa@mail.com", isAdmin: false },
+  { username: "Matti", email: "Matti@mail.com", isAdmin: true },
+  { username: "Mikko", email: "Mikkoa@mail.com", isAdmin: true },
+  { username: "Mauri", email: "Mauri@mail.com", isAdmin: false },
+];
+
+function getAdmins(users) {
+  return users.filter((user) => user.isAdmin);
+}
+const adminUsers = getAdmins(userProfiles);
+console.log("Admins only: ", adminUsers);
+
+adminUsers.forEach((userProfiles) => {
+  console.log(`Admins only: ${userProfiles.username}, ${userProfiles.email}`);
+});
+
 /* Task 12
 Define an array named `orders`, where each order contains `orderId`, `customerName`, `totalAmount`, and `status` (either "pending" or "completed").
 Write a function that returns only the completed orders.
 */
 
 // Your code here
+
+const orders = [
+  {
+    orderId: "12234",
+    customerName: "Arttu Asiakas",
+    totalAmount: 150,
+    status: "pending",
+  },
+  {
+    orderId: "12235",
+    customerName: "Alma Asiakas",
+    totalAmount: 240,
+    status: "completed",
+  },
+  {
+    orderId: "12236",
+    customerName: "Anselmi Asiakas",
+    totalAmount: 50,
+    status: "pending",
+  },
+  {
+    orderId: "12237",
+    customerName: "Anssi Asiakas",
+    totalAmount: 1500,
+    status: "completed",
+  },
+  {
+    orderId: "12238",
+    customerName: "Alisa Asiakas",
+    totalAmount: 560,
+    status: "completed",
+  },
+];
+
+function completedOrders(orders) {
+  return orders.filter((orders) => orders.status === "completed");
+}
+
+console.log(completedOrders(orders));
 
 /* Task 13
 Create an object named `smartphone` with properties for `brand`, `model`, `batteryLife`, and `is5GEnabled`.
@@ -190,6 +253,26 @@ Write a function that logs `"This phone supports 5G!"` if `is5GEnabled` is `true
 
 // Your code here
 
+const smartPhone = {
+  brand: "Mokia",
+  model: 2110,
+  batterylife: "80%",
+  is5GEnabled: false,
+};
+
+function check5G(phone) {
+  if (phone.is5GEnabled) {
+    console.log(
+      `This phone: ${smartPhone.brand} model: ${smartPhone.model} supports 5G!`
+    );
+  } else {
+    console.log(
+      `This phone: ${smartPhone.brand} model: ${smartPhone.model} does not support 5G`
+    );
+  }
+}
+check5G(smartPhone);
+
 /* Task 14
 Define an object named `fox` with properties `name`, `age`, and `habitat`.
 Write a function that logs `"This fox is young"` if its age is under 3, `"This fox is an adult"` if 3 or older.
@@ -197,9 +280,36 @@ Write a function that logs `"This fox is young"` if its age is under 3, `"This f
 
 // Your code here
 
+const fox = {
+  name: "Foxy",
+  age: 5,
+  habitat: "Forrest",
+};
+
+function checkAge(fox) {
+  if (fox.age < 3) {
+    console.log("This Fox is young");
+  } else {
+    console.log("This fox is an adult");
+  }
+}
+checkAge(fox);
+
 /* Task 15
 Define an array named `employees`, where each employee has `name`, `position`, and `salary`.
 Write a function that calculates the total salary of all employees in the company.
 */
 
 // Your code here
+
+const employees = [
+  { name: "Tomi Työntekijä", position: "työntekijä", salary: 1500 },
+  { name: "Timo Työntekijä", position: "työntekijä", salary: 1200 },
+  { name: "Tiina Työntekijä", position: "Sihteeri", salary: 2000 },
+  { name: "Tuire Työntekijä", position: "apulainen", salary: 1000 },
+  { name: "Jussi Johtaja", position: "Johtaja", salary: 5500 },
+];
+function totalSalaries(employees) {
+  return employees.reduce((total, employee) => total + employee.salary, 0);
+}
+console.log("Total salaries of the company: ", totalSalaries(employees));

@@ -3,6 +3,20 @@ Create an object `weather` that contains properties `temperature`, `humidity`, a
 Write a function that logs `"Take an umbrella!"` if it's rainy.
 */
 
+const weather = {
+  temperature: 25,
+  humidity: 40,
+  condition: "Rainy",
+};
+function forecast() {
+  if (weather.condition === "Rainy") {
+    console.log("take an umberella");
+  } else {
+    console.log("Its a nice day, enjoy!");
+  }
+}
+forecast();
+
 // Your code here
 
 /* Task 2
@@ -13,12 +27,39 @@ Write a function that calculates the total price of all items in the cart.
 
 // Your code here
 
+const shoppingCart = [
+  { name: "potato", price: 0.5, quantity: 3 },
+  { name: "tomato", price: 0.3, quantity: 2 },
+  { name: "onion", price: 0.2, quantity: 5 },
+  { name: "meat", price: 3.5, quantity: 1 },
+  { name: "cream", price: 0.89, quantity: 2 },
+  { name: "chocolate", price: 5.65, quantity: 1 },
+];
+
+function sumItems(cart) {
+  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+console.log("Total price of your groceries is: ", sumItems(shoppingCart));
+
 /* Task 3
 Create an array of objects named `restaurants`, each with properties `name`, `cuisineType`, and `rating`.
 Write a function that returns only the restaurants with a rating of 4 or higher.
 */
 
 // Your code here
+
+const restaurants = [
+  { name: "Ramin Rafla", cuisineType: "street food", rating: 5 },
+  { name: "McDonalds ", cuisineType: "garbage", rating: 3 },
+  { name: "Köpin Keittiö", cuisineType: "gourmet", rating: 4 },
+  { name: "Alis Pizza&Kebab", cuisineType: "street food", rating: 5 },
+];
+
+restaurants.forEach((rafla) => {
+  if (rafla.rating >= 4) {
+    console.log(rafla);
+  }
+});
 
 /* Task 4
 Define an object named `bankAccount` with properties `accountHolder`, `balance`, and `transactions` (an array of numbers).
@@ -27,12 +68,50 @@ Write a function that calculates the total balance after all transactions.
 
 // Your code here
 
+const bankAccount = {
+  accountHolder: "antti asiakas",
+  balance: 0,
+  transactions: [50, -50, 10, 25, 30, -28],
+};
+
+function sumTrans(transactions) {
+  return transactions.reduce((total, amount) => total + amount, 0);
+}
+console.log(
+  "Total balance of your transactions: ",
+  sumTrans(bankAccount.transactions)
+);
+
 /* Task 5
 Create an array `students` where each student has `name`, `scores` (array of numbers), and `averageScore` (initially null).
 Write a function that calculates and updates each student's `averageScore`.
 */
 
 // Your code here
+
+const students = [
+  { name: "Onni Opiskelija", scores: [8, 6.5, 7, 9, 5], averageScore: null },
+  {
+    name: "Olga Opiskelija",
+    scores: [8.8, 9.5, 8.7, 9, 8.5],
+    averageScore: null,
+  },
+  {
+    name: "Osmo Opiskelija",
+    scores: [6, 6.5, 6.7, 7.9, 5],
+    averageScore: null,
+  },
+  {
+    name: "Oiva Opiskelija",
+    scores: [9.8, 8.5, 8.7, 9.1, 9.5],
+    averageScore: null,
+  },
+  {
+    name: "Olivia Opiskelija",
+    scores: [8, 9.5, 8.7, 9, 10],
+    averageScore: null,
+  },
+];
 
 /* Task 6
 Define an array named `courses`, each containing `courseName`, `instructor`, and `studentsEnrolled`.

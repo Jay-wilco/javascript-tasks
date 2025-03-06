@@ -9,32 +9,6 @@ const summaryText = document.getElementById("orderSummary");
 const customerName = document.getElementById("customerName");
 const delivery = document.getElementById("delivery");
 
-// const calculateTotal = () => {
-//   let totalPrice = parseFloat(pancakeType.value);
-
-//   console.log("event was triggered");
-
-//   toppings.forEach((topping) => {
-//     if (topping.checked) {
-//       totalPrice += parseFloat(topping.value);
-//     }
-//   });
-
-//   extras.forEach((extra) => {
-//     if (extra.checked) {
-//       totalPrice += parseFloat(extra.value);
-//     }
-//   });
-//   totalPriceDisplay.textContent = `${totalPrice}€`;
-//   totalPriceBanner.textContent = `${totalPrice}€`;
-// };
-
-// pancakeType.addEventListener("change", calculateTotal);
-// toppings.forEach((topping) =>
-//   topping.addEventListener("change", calculateTotal)
-// );
-// extras.forEach((extra) => extra.addEventListener("change", calculateTotal));
-
 const changeHandler = (event) => {
   //   console.log("event target: ", event.target);
   const basePrice = parseFloat(
@@ -51,7 +25,7 @@ const changeHandler = (event) => {
     0
   );
 
-  const delivery = [...document.querySelectorAll(".delivery:checked")].reduce(
+  const delivery = [...document.querySelector(".delivery:checked")].reduce(
     (sum, delivery) => sum + parseFloat(delivery.dataset.price),
     0
   );
@@ -68,6 +42,30 @@ const changeHandler = (event) => {
 
 pancakeForm.addEventListener("change", changeHandler);
 
+// seeOrderBtn.addEventListener("click", () => {
+//   summaryText.textContent = `Customer ${customerName.value} ordered ${pancakeType.value} with ${toppings.value} and ${extras.value} and ${delivery.value}`;
+// });
+
 seeOrderBtn.addEventListener("click", () => {
-  summaryText.textContent = `Customer ${customerName.value} ordered ${pancakeType.value} with ${toppings.value} and ${extras.value} and ${delivery.value}`;
+  // Get selected pancake type
+  const selectedPancake = pancakeType.selectedOptions[0].value;
+
+  // Get checked toppings
+  const selectedToppings =
+    [...document.querySelectorAll(".topping:checked")]
+      .map((topping) => topping.value)
+      .join(", ") || "no toppings";
+
+  // Get checked extras
+  const selectedExtras =
+    [...document.querySelectorAll(".extra:checked")]
+      .map((extra) => extra.value)
+      .join(", ") || "no extras";
+
+  // Get selected delivery method
+  const selectedDelivery =
+    document.querySelector(".delivery:checked")?.value || "No delivery";
+
+  // Display order summary
+  summaryText.textContent = `Customer ${customerName.value} ordered ${selectedPancake} pancakes with ${selectedToppings} and ${selectedExtras}, delivered via ${selectedDelivery}.`;
 });

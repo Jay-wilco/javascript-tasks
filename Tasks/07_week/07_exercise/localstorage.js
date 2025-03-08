@@ -207,7 +207,7 @@ function markTaskComplete(taskID) {
   localStorage.setItem("tasks", JSON.stringify(retrievedTasks));
   console.log(retrievedTasks);
 }
-markTaskComplete(1, 4);
+markTaskComplete(1);
 
 /* Task 10
 Write a function `clearLocalStorage()` that removes all data stored in LocalStorage.
@@ -215,3 +215,9 @@ Call it and confirm LocalStorage is empty.
 */
 
 // Your code here
+function clearLocalStorage() {
+  localStorage.clear();
+}
+
+clearLocalStorage();
+console.log(localStorage);

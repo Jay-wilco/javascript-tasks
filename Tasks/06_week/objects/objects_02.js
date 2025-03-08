@@ -344,6 +344,8 @@ const cars = [
 const maxHp = () => {
   cars.forEach;
 };
+
+
 /* Task 15
 Create an array of `airports`, where each airport has `name`, `country`, and `flightsPerDay`.
 Write a function that finds the airport with the most daily flights.

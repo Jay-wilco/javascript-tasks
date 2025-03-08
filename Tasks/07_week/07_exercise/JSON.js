@@ -170,4 +170,9 @@ const gameProgress = {
 };
 
 const jsonProgress = JSON.stringify(gameProgress);
+const parsedProgress = JSON.parse(jsonProgress);
+
+parsedProgress.score += 100;
+
 console.log(jsonProgress);
+console.log(parsedProgress);

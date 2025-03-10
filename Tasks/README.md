@@ -40,4 +40,4 @@ Week_06
 Week_07
 
 - [ ] JSON
-- [ ] localStorage
+- [x] localStorage

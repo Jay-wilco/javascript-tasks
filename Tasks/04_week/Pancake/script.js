@@ -1,3 +1,5 @@
+"use strict";
+
 const pancakeType = document.querySelector("#type");
 const toppings = document.querySelectorAll(".topping");
 const extras = document.querySelectorAll(".extra");
@@ -63,3 +65,7 @@ seeOrderBtn.addEventListener("click", () => {
 });
 
 // join thingy to read all values or smth
+
+// use constructor for part 3!
+
+// template (Array?) this.object

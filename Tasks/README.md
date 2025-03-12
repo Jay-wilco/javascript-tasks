@@ -34,10 +34,16 @@ Week_06
 
 - [ ] little zoo
 - [x] Objects_01
-- [ ] objects_02
+- [x] objects_02
 - [ ] objects_03
 
 Week_07
 
+- [ ] pancake pt.3
 - [ ] JSON
 - [x] localStorage
+
+Week_08
+
+- [x]js-writing-practices
+- [x] error-handling

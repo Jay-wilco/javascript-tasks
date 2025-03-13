@@ -28,7 +28,7 @@ week_04
 Week_05
 
 - [x] Arrays 1, 2
-- [ ] pancake pt.2
+- [x] pancake pt.2
 
 Week_06
 
@@ -45,5 +45,6 @@ Week_07
 
 Week_08
 
-- [x]js-writing-practices
+- [x] js-writing-practices
 - [x] error-handling
+- [x] fault-finding

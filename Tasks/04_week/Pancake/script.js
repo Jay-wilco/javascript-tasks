@@ -34,17 +34,9 @@ const changeHandler = (event) => {
   extrasTotal = 0;
   deliveryTotal = 0;
 
-  //   console.log("event target: ", event.target);
   const basePrice = parseFloat(
     document.getElementById("type").selectedOptions[0].dataset.price
   );
-  console.log("toppings", toppings);
-
-  // toppingsArray.length = 0; // Clear previous values
-  // extrasArray.length = 0; // Clear previous values
-
-  /* for each toppings you should read the value for list of what is selected
-   */
 
   toppings.forEach((topping) => {
     if (topping.checked) {
@@ -66,36 +58,27 @@ const changeHandler = (event) => {
       deliveryTotal += parseFloat(delivery.dataset.price);
     }
   });
-  // const toppingsTotal = [
-  //   ...document.querySelectorAll(".topping:checked"),
-  // ].reduce((sum, topping) => sum + parseFloat(topping.dataset.price), 0);
-
-  // const extrasTotal = [...document.querySelectorAll(".extra:checked")].reduce(
-  //   (sum, extra) => sum + parseFloat(extra.dataset.price),
-  //   0
-  // );
-
-  // const deliveryTotal = [
-  //   ...document.querySelectorAll(".delivery:checked"),
-  // ].reduce((sum, delivery) => sum + parseFloat(delivery.dataset.price), 0);
-  console.log(pancakeType.value);
-
-  console.log("toppings total: ", toppingsTotal);
-  console.log("extras total: ", extrasTotal);
-  console.log("delivery: ", deliveryTotal);
 
   totalPrice = basePrice + toppingsTotal + extrasTotal + deliveryTotal;
 
   totalPriceDisplay.textContent = `${totalPrice}€`;
   totalPriceBanner.textContent = `${totalPrice}€`;
-  // Apply blinking effect to the entire price banner
+
   totalPriceBanner.parentElement.classList.add("blink");
 
-  // Remove the blinking effect after animation completes
   setTimeout(() => {
     totalPriceBanner.parentElement.classList.remove("blink");
   }, 500);
+
+  return {
+    basePrice,
+    selectedToppings,
+    selectedExtras,
+    selectedDelivery,
+    totalPrice,
+  };
 };
+
 pancakeForm.addEventListener("change", changeHandler);
 
 seeOrderBtn.addEventListener("click", (event) => {
@@ -103,12 +86,6 @@ seeOrderBtn.addEventListener("click", (event) => {
 
   const customerNameOrder = customerName.value.trim();
 
-  // const toppingsText =
-  //   selectedToppings.length > 0 ? selectedToppings.join(", ") : "None";
-  // const extrasText =
-  //   selectedExtras.length > 0 ? selectedExtras.join(", ") : "None";
-  // const deliveryText =
-  //   selectedDelivery.length > 0 ? selectedDelivery.join(", ") : "None";
   const orderSummary = {
     extras: [...document.querySelectorAll(".extra:checked")].map((extra) =>
       extra.parentElement.textContent.trim()
@@ -133,44 +110,42 @@ Delivery: ${
 Total price: ${totalPrice} €`;
 });
 
-//   console.log("orderSummary: ", orderSummary);
-//   const totalOrderPrice = totalPriceDisplay.textContent;
-//   summaryText.textContent = `Hello ${customerNameOrder} Your order: ${
-//     pancakeType.value
-//   } with ${orderSummary.toppings.join(", ")} and ${orderSummary.extras.join(
-//     ", "
-//   )} with delivery: ${orderSummary.delivery.join(
-//     ", "
-//   )}. Your Total Order Price: ${totalOrderPrice}
-//     `;
-// });
-
 // part 3 starts here ,maybe XD ->
 
-const newOrder = {
-  id: Date.now(),
-  customerName: customerOrderName,
-  selectedPancake: pancakeType.value,
-  toppings: selectedToppings,
-  extras: selectedExtras,
-  deliveryMethod: selectedDelivery,
-  totalPrice: totalPrice,
-  status: "waiting",
-};
+makeOrderBtn.addEventListener("click", () => {
+  const {
+    basePrice,
+    selectedToppings,
+    selectedExtras,
+    selectedDelivery,
+    totalPrice,
+  } = changeHandler();
 
-// seeOrderBtn.addEventListener("click", () => {
-//   let totalPrice = basePrice + toppingsTotal + extrasTotal + delivery;
-//   console.log("toppingsArray: ", toppingsArray);
-//   console.log("extrasArray: ", extrasArray);
-//   summaryText.textContent = `Customer ${customerName.value} ordered ${
-//     pancakeType.value
-//   } with ${toppingsArray.join(",")} and ${extrasArray.join(
-//     ","
-//   )} and the total price is: ${totalPrice}`;
-// });
+  const customerNameOrder = customerName.value.trim();
+  const newOrder = {
+    id: Date.now(),
+    customerName: customerNameOrder,
+    selectedPancake: pancakeType.value,
+    toppings: selectedToppings,
+    extras: selectedExtras,
+    deliveryMethod: selectedDelivery,
+    totalPrice: totalPrice,
+    status: "waiting",
+  };
 
-// join thingy to read all values or smth
+  let orders = JSON.parse(localStorage.getItem("getOrders")) || [];
+  orders.push(newOrder);
+  localStorage.setItem("getOrders", JSON.stringify(orders));
 
+  alert("Thank you, your order has been sent to the Chef!");
+
+  summaryText.textContent = "";
+  pancakeForm.reset();
+  totalPriceDisplay.textContent = "0 €";
+  totalPriceBanner.textContent = "0 €";
+});
+
+pancakeForm.addEventListener("change", changeHandler);
 // use constructor for part 3!
 
 // template (Array?) this.object

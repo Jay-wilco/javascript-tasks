@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <title>Pancake Maker</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap");
+    </style>
   </head>
-  <body>
+
+  <body class="tektur-body">
     <div class="container">
       <div class="image-container">
         <img
@@ -119,7 +123,19 @@
         <div id="orderSummary">
           <h3>Order Summary</h3>
           <p id="summaryText">Your order details will appear here.</p>
-          <button type="button" id="makeOrder">Make order here</button>
+          <button type="button" id="makeOrder">Confirm your order</button>
+
+          <!-- <button class="modalBtn">See more</button> -->
+          <!-- <button id="myBtn">Open Modal</button> -->
+
+          <!-- The Modal -->
+          <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>customerName: ${customerNameOrder}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

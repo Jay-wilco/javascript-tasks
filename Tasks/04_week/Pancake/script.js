@@ -18,13 +18,14 @@ const delivery = document.querySelectorAll(".delivery");
 const modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-const btn = document.getElementById("myBtn");
+// const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 makeOrderBtn.onclick = function () {
+  document.body.classList.add("modal-open");
   modal.style.display = "block";
 };
 
@@ -37,6 +38,7 @@ span.onclick = function () {
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    ocument.body.classList.remove("modal-open");
   }
 };
 

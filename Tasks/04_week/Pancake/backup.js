@@ -11,54 +11,17 @@ const makeOrderBtn = document.querySelector("#makeOrder");
 const summaryText = document.querySelector("#summaryText");
 const customerName = document.querySelector("#customerName");
 const delivery = document.querySelectorAll(".delivery");
-const modal = document.getElementById("myModal");
-const span = document.getElementsByClassName("close")[0];
-const checkoutBtn = document.querySelector("#checkoutBtn");
 // const selectedDelivery = document.querySelector(".delivery:checked");
 
 // Modal orderlist ??
 // Get the modal
+const modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
 // const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-
-class Order {
-  constructor(
-    customerName,
-    pancakeType,
-    toppings,
-    extras,
-    deliveryMethod,
-    totalPrice
-  ) {
-    this.id = Date.now();
-    this.customerName = customerName;
-    this.pancakeType = pancakeType;
-    this.toppings = toppings;
-    this.extras = extras;
-    this.deliveryMethod = deliveryMethod;
-    this.totalPrice = totalPrice;
-    this.status = "waiting";
-  }
-
-  // console.log(newOrder);
-
-  // let orders = JSON.parse(localStorage.getItem("orders")) || [];
-  // orders.push(newOrder);
-  // localStorage.setItem("orders", JSON.stringify(orders));
-  saveOrder() {
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
-    orders.push(this);
-    localStorage.setItem("orders", JSON.stringify(orders));
-  }
-
-  // Retrieve all orders (returns the orders array)
-  static getOrders() {
-    return JSON.parse(localStorage.getItem("orders")) || [];
-  }
-}
+const span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 makeOrderBtn.onclick = function () {
@@ -72,12 +35,12 @@ span.onclick = function () {
 };
 
 // When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", (event) => {
+window.onclick = function (event) {
   if (event.target === modal) {
     modal.style.display = "none";
     document.body.classList.remove("modal-open");
   }
-});
+};
 
 /*End of modal maddness? */
 
@@ -190,70 +153,31 @@ makeOrderBtn.addEventListener("click", () => {
   } = changeHandler();
 
   const customerNameOrder = customerName.value.trim();
-  if (!customerNameOrder) {
-    alert("Please enter your name before ordering.");
-    return;
-  }
 
-  const newOrder = new Order(
-    customerNameOrder,
-    pancakeType.value,
-    selectedToppings,
-    selectedExtras,
-    selectedDelivery,
-    totalPrice
-  );
+  const orderId = Date.now();
+  const newOrder = {
+    id: orderId,
+    customerName: customerNameOrder,
+    selectedPancake: pancakeType.value,
+    toppings: selectedToppings,
+    extras: selectedExtras,
+    deliveryMethod: selectedDelivery,
+    totalPrice: totalPrice,
+    status: "waiting",
+  };
+  console.log(newOrder);
 
-  newOrder.saveOrder();
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push(newOrder);
+  localStorage.setItem("orders", JSON.stringify(orders));
 
-  const modalOrderSummary = document.getElementById("modalOrderSummary");
-  modalOrderSummary.innerHTML = "";
+  // console.log(orders);
 
-  document.getElementById("modalOrderSummary").innerHTML = `
-  <h3>Order Summary</h3>
-  <p><strong>Name:</strong> ${newOrder.customerName}</p>
-  <p><strong>Pancake:</strong> ${newOrder.pancakeType}</p>
-  <p><strong>Toppings:</strong> ${
-    newOrder.toppings.length ? newOrder.toppings.join(", ") : "None"
-  }</p>
-  <p><strong>Extras:</strong> ${
-    newOrder.extras.length ? newOrder.extras.join(", ") : "None"
-  }</p>
-  <p><strong>Delivery:</strong> ${newOrder.deliveryMethod || "None"}</p>
-  <p><strong>Total Price:</strong> ${newOrder.totalPrice} €</p>
-`;
-
-  // Show modal
-  modal.style.display = "block";
-
-  // Reset form but keep modal open
+  summaryText.textContent = "";
   pancakeForm.reset();
-  // selectedToppings = [];
-  // selectedExtras = [];
-  // selectedDelivery = [];
   totalPriceDisplay.textContent = "0 €";
   totalPriceBanner.textContent = "0 €";
 });
-
-// const orderId = Date.now();
-// const newOrder = {
-//   id: orderId,
-//   customerName: customerNameOrder,
-//   selectedPancake: pancakeType.value,
-//   toppings: selectedToppings,
-//   extras: selectedExtras,
-//   deliveryMethod: selectedDelivery,
-//   totalPrice: totalPrice,
-//   status: "waiting",
-// };
-
-// console.log(orders);
-
-//   summaryText.textContent = "";
-//   pancakeForm.reset();
-//   totalPriceDisplay.textContent = "0 €";
-//   totalPriceBanner.textContent = "0 €";
-// });
 
 pancakeForm.addEventListener("change", changeHandler);
 // use constructor for part 3!

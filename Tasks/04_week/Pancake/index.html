@@ -11,7 +11,7 @@
   <div class="main">
     
     <audio id="myAudio" autoplay>
-      <source src="audio/Terminator 2 Theme 1080p High Quality.mp3" type="audio/mpeg">
+      <source src="./audio/odyssey edit.mp3" type="audio/mpeg">
       Your browser does not support the audio tag.
     </audio>
    
@@ -143,7 +143,11 @@
           <!-- Modal content -->
             <div class="modal-content">
               <span class="close">&times;</span>
-              <p>customerName: ${customerNameOrder}</p>
+              <div id="modalOrderSummary">
+                <!-- Order details will be inserted here dynamically -->
+                
+                <button type="button" id="checkoutBtn">Checkout</button>
+              </div>
             </div>
           </div>
         </div>

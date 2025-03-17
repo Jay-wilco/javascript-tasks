@@ -48,3 +48,7 @@ Week_08
 - [x] js-writing-practices
 - [x] error-handling
 - [x] fault-finding
+
+Week_09
+
+- [x] destructuring

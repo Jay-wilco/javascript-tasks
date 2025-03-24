@@ -40,7 +40,7 @@ Week_06
 Week_07
 
 - [ ] pancake pt.3
-- [ ] JSON
+- [x] JSON
 - [x] localStorage
 
 Week_08
@@ -51,4 +51,7 @@ Week_08
 
 Week_09
 
+- [x] async
+- [x] chaining
 - [x] destructuring
+- [x] spread operator

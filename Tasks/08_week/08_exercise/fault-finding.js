@@ -193,17 +193,17 @@ console.log(filterProducts(products, 1000)); // Expected: ["Phone", "Mouse"]
 Should save a user object to LocalStorage and retrieve it.  
 */
 
-// function saveUser(user) {
-//   localStorage.setItem("user", JSON.stringify(user));
-// }
+function saveUser(user) {
+  localStorage.setItem("user", JSON.stringify(user));
+}
 
-// function getUser() {
-//   return JSON.parse(localStorage.getItem("user"));
-// }
+function getUser() {
+  return JSON.parse(localStorage.getItem("user"));
+}
 
-// // Debug & Test
-// saveUser({ name: "Alice", age: 25 });
-// console.log(getUser()); // Expected: { name: "Alice", age: 25 }
+// Debug & Test
+saveUser({ name: "Alice", age: 25 });
+console.log(getUser()); // Expected: { name: "Alice", age: 25 }
 
 /* Task 14: Debug a Loop that Processes Array  
 Should return an array of squared numbers.  

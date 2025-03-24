@@ -14,26 +14,20 @@ const delivery = document.querySelectorAll(".delivery");
 const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
 const checkoutBtn = document.querySelector("#checkoutBtn");
-// const selectedDelivery = document.querySelector(".delivery:checked");
-
-// Modal orderlist ??
-// Get the modal
-
-// Get the button that opens the modal
-// const btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
+const orderId = Date.now();
 
 class Order {
   constructor(
+    orderId,
     customerName,
+
     pancakeType,
     toppings,
     extras,
     deliveryMethod,
     totalPrice
   ) {
-    this.id = Date.now();
+    this.id = orderId;
     this.customerName = customerName;
     this.pancakeType = pancakeType;
     this.toppings = toppings;
@@ -43,11 +37,6 @@ class Order {
     this.status = "waiting";
   }
 
-  // console.log(newOrder);
-
-  // let orders = JSON.parse(localStorage.getItem("orders")) || [];
-  // orders.push(newOrder);
-  // localStorage.setItem("orders", JSON.stringify(orders));
   saveOrder() {
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
     orders.push(this);
@@ -83,8 +72,8 @@ window.addEventListener("click", (event) => {
 
 let selectedToppings = [];
 let selectedExtras = [];
-let selectedDelivery = []; // Initialize as an empty array
-// const selectedExtras = [];
+let selectedDelivery = [];
+
 let toppingsTotal = 0;
 let extrasTotal = 0;
 let deliveryTotal = 0;
@@ -196,6 +185,7 @@ makeOrderBtn.addEventListener("click", () => {
   }
 
   const newOrder = new Order(
+    orderId,
     customerNameOrder,
     pancakeType.value,
     selectedToppings,
@@ -206,11 +196,10 @@ makeOrderBtn.addEventListener("click", () => {
 
   newOrder.saveOrder();
 
-  const modalOrderSummary = document.getElementById("modalOrderSummary");
-  modalOrderSummary.innerHTML = "";
-
   document.getElementById("modalOrderSummary").innerHTML = `
   <h3>Order Summary</h3>
+
+  <p><strong>orderId</strong> ${newOrder.orderId}</p>
   <p><strong>Name:</strong> ${newOrder.customerName}</p>
   <p><strong>Pancake:</strong> ${newOrder.pancakeType}</p>
   <p><strong>Toppings:</strong> ${
@@ -221,39 +210,23 @@ makeOrderBtn.addEventListener("click", () => {
   }</p>
   <p><strong>Delivery:</strong> ${newOrder.deliveryMethod || "None"}</p>
   <p><strong>Total Price:</strong> ${newOrder.totalPrice} €</p>
+  <button type="button" id="checkoutBtn">Checkout</button>
 `;
 
-  // Show modal
+  //   // Show modal
   modal.style.display = "block";
+  // Attach event listener to checkout button AFTER it exists
+  document.querySelector("#checkoutBtn").addEventListener("click", () => {
+    alert("Order has been placed successfully!");
+    modal.style.display = "none"; // Close modal after checkout
+  });
 
   // Reset form but keep modal open
   pancakeForm.reset();
-  // selectedToppings = [];
-  // selectedExtras = [];
-  // selectedDelivery = [];
+
   totalPriceDisplay.textContent = "0 €";
   totalPriceBanner.textContent = "0 €";
 });
-
-// const orderId = Date.now();
-// const newOrder = {
-//   id: orderId,
-//   customerName: customerNameOrder,
-//   selectedPancake: pancakeType.value,
-//   toppings: selectedToppings,
-//   extras: selectedExtras,
-//   deliveryMethod: selectedDelivery,
-//   totalPrice: totalPrice,
-//   status: "waiting",
-// };
-
-// console.log(orders);
-
-//   summaryText.textContent = "";
-//   pancakeForm.reset();
-//   totalPriceDisplay.textContent = "0 €";
-//   totalPriceBanner.textContent = "0 €";
-// });
 
 pancakeForm.addEventListener("change", changeHandler);
 // use constructor for part 3!

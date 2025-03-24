@@ -54,3 +54,15 @@ Expected output: `"LAPTOP"`
 */
 
 // Write your code here
+function getInStockProducts(products) {
+  return products
+    .filter((product) => product.stock > 0)
+    .map((product) => product.name.toUpperCase())
+    .join(", ");
+}
+
+const products = [
+  { name: "Laptop", stock: 10 },
+  { name: "Phone", stock: 0 },
+];
+console.log(getInStockProducts(products));

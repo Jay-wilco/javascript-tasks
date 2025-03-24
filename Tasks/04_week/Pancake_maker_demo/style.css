@@ -1,0 +1,234 @@
+body {
+  background-color: black;
+  background-image: url("images/epicspace.png");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat; /* Prevents tiling */
+  color: #3aed04;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+}
+@import url("https://fonts.googleapis.com/css2?family=Tektur:wght@400;700&display=swap");
+.tektur-body {
+  font-family: "Tektur", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+/*  */
+/*overflow: hidden;*/
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100vw;
+}
+
+.image-container {
+  position: sticky;
+  display: flex;
+  justify-content: center; /* Aligns to the left */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Full height of the viewport */
+  width: 50%; /* Adjust width as needed */
+}
+
+.image-container img {
+  max-width: 100%; /* Ensures it doesn't overflow */
+  height: auto;
+  display: block;
+}
+
+.form-container {
+  flex: 1;
+  padding: 50px;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.price-banner {
+  position: fixed;
+  align-items: start;
+  top: 20px;
+  left: 20px;
+  background-color: #cf34ca;
+  color: white;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+    background-color: #cf34ca;
+  }
+  50% {
+    opacity: 0.2;
+    background-color: #7a0f44;
+  } /* Lighter pink */
+  100% {
+    opacity: 1;
+    background-color: #cf34ca;
+  }
+}
+
+.blink {
+  animation: blink 0.5s ease-in-out;
+}
+
+.blink {
+  animation: blink 0.5s ease-in-out;
+}
+#orderSummary {
+  margin-bottom: 20px; /* Adds space below the order summary */
+}
+#seeOrder {
+  display: block;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #cf34ca;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Tektur", sans-serif !important;
+}
+
+#makeOrder {
+  display: block; /* Ensures it takes full width */
+  margin: 10px auto; /* Centers the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #cf34ca;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Tektur", sans-serif !important;
+}
+
+button #checkoutBtn {
+  display: block; /* Ensures it takes full width */
+  margin: 10px auto; /* Centers the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #cf34ca;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Tektur", sans-serif !important;
+}
+/*modal maddness ???*/
+.modal-open .main {
+  /* filter: blur(8px); */
+  overflow: hidden; /* Prevent scrolling when modal is open */
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  color: #7a0f44;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  filter: none;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  position: fixed;
+  top: 40%;
+  border-radius: 5px;
+  right: 75px; /* 50px margin from the right */
+  transform: translateY(-50%);
+  padding: 20px;
+  border: 1px solid #888;
+  width: 250px; /* Adjust width as needed */
+  height: 450px; /* Adjust height automatically */
+  max-width: 400px; /* Optional: Limit max width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  /* .modal {
+  background-color: rgb(245, 247, 244);
+  height: 60vh;
+  width: 60vw;
+  padding: 2rem;
+  position: relative;
+  color: rgb(3, 3, 3);
+}
+
+.modalBtn {
+  display: block;
+  margin-top: 150px;
+  top: 0.5rem;
+  right: 0.5rem;
+  height: 50px;
+  background-color: aliceblue;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(104, 59, 59, 0.78);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hidden {
+  display: none; */
+}
+
+/* end of modal??*/
+
+#makeOrder:hover {
+  background-color: #14e72d;
+}
+h3 {
+  margin-top: 15px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+select,
+label {
+  display: block;
+  margin-top: 10px;
+}

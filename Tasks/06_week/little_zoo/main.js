@@ -18,26 +18,49 @@ const animals = [
   { name: "Goldfish", type: "Fish", age: "Unknown", color: "Orange" },
 ];
 
-const animalList = document.querySelector("#animalList"); //
+const animalList = document.querySelector("#animalList");
 const addAnimalButton = document.querySelector("#addAnimal");
 const searchInput = document.querySelector("#searchAnimal");
 const sortButton = document.querySelector("#sortAnimals");
 const filterType = document.querySelector("#filterType");
 
 const displayAnimals = (animalArray) => {
-  animalList.innerHTML = ""; // Will clean the ul
+  animalList.innerHTML = "";
   for (const animal of animalArray) {
     const li = document.createElement("li");
     li.textContent = `${animal.name}  (${animal.type}), Age: ${animal.age}, Color: ${animal.color}`;
     animalList.appendChild(li);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Remove";
+    deleteButton.classList.add("remove-btn");
+    deleteButton.addEventListener("click", () => removeAnimal(animal));
+    li.appendChild(deleteButton);
+  }
+};
+
+const removeAnimal = (animalRemove) => {
+  const index = animals.indexOf(animalRemove);
+  if (index !== -1) {
+    animals.splice(index, 1);
+
+    displayAnimals(animals);
   }
 };
 const addAnimal = () => {
   const nameInput = document.querySelector("#newAnimalName").value.trim();
-  animals.push(nameInput);
+  const typeInput = document.querySelector("#newAnimalType").value;
+
+  const newAnimal = {
+    name: nameInput,
+    type: typeInput,
+  };
+
+  animals.push(newAnimal);
   displayAnimals(animals);
 
   document.querySelector("#newAnimalName").value = "";
+  document.querySelector("#newAnimalType").value = "";
 };
 
 const searchAnimal = () => {
@@ -62,7 +85,7 @@ const filterByTypeAnimal = () => {
 };
 
 const sortAnimal = () => {
-  animals.sort();
+  animals.sort((a, b) => a.name.localeCompare(b.name));
   displayAnimals(animals);
 };
 
@@ -70,4 +93,4 @@ addAnimalButton.addEventListener("click", addAnimal);
 searchInput.addEventListener("input", searchAnimal);
 sortButton.addEventListener("click", sortAnimal);
 filterType.addEventListener("change", filterByTypeAnimal);
-displayAnimals(animals); // calling the function
+displayAnimals(animals);

@@ -119,12 +119,13 @@ Write a function `filterHighRatedMovies(jsonString)` that:
 
 // Your code here
 
-// function filterHighRatedMovies(jsonString) {
-//   const jsonMovieArray = JSON.parse(jsonString);
-//   return jsonMovieArray.filter((movie) => movie.rating);
-// }
-// console.log(filterHighRatedMovies());
+function filterHighRatedMovies(jsonString) {
+  const parsedMovies = JSON.parse(jsonString);
+  return parsedMovies.filter((movie) => movie.rating > 8);
+}
 
+const highRatedMovies = filterHighRatedMovies(jsonMovies);
+console.log(highRatedMovies);
 /* Task 8
 Define an object named `shoppingCart` with:
 - `items` (an array of product objects, each with `name` and `price`)
@@ -133,11 +134,17 @@ Convert `shoppingCart` into a JSON string and log it to the console.
 
 // Your code here
 
-const shoppingCart = {
-  name: "tomato",
-  price: 5,
-};
-
+const shoppingCart = [
+  { name: "tomato", price: 5 },
+  {
+    name: "potato",
+    price: 3,
+  },
+  {
+    name: "carrot",
+    price: 2,
+  },
+];
 const jsonCart = JSON.stringify(shoppingCart);
 console.log(jsonCart);
 
@@ -149,6 +156,13 @@ Write a function `totalCartValue(jsonString)` that:
 */
 
 // Your code here
+function totalCartValue(jsonString) {
+  const cart = JSON.parse(jsonString);
+  return cart.reduce((total, item) => total + item.price, 0);
+}
+
+//
+console.log(totalCartValue(jsonCart));
 
 /* Task 10
 Create an object named `gameProgress` with:

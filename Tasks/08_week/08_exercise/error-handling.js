@@ -111,26 +111,26 @@ localStorage.setItem("user", "{ invalid JSON }"); // Simulate corruption
 console.log(getUser()); // Should log an error and return null
 */
 
-// function saveUser(user) {
-//   localStorage.setItem("user", JSON.stringify(user));
-// }
+function saveUser(user) {
+  localStorage.setItem("user", JSON.stringify(user));
+}
 
-// function getUser() {
-//   try {
-//     const user = localStorage.getItem("user");
-//     return JSON.parse(user);
-//   } catch (error) {
-//     console.log("Invalid JSON" + error.message);
-//     return null;
-//   } finally {
-//     console.log("doesnt work in console");
-//   }
-// }
+function getUser() {
+  try {
+    const user = localStorage.getItem("user");
+    return JSON.parse(user);
+  } catch (error) {
+    console.log("Invalid JSON" + error.message);
+    return null;
+  } finally {
+    console.log("doesnt work in console");
+  }
+}
 
-// saveUser({ name: "Alice", age: 25 });
-// console.log(getUser());
-// localStorage.setItem("user", "{ invalid JSON }");
-// console.log(getUser());
+saveUser({ name: "Alice", age: 25 });
+console.log(getUser());
+localStorage.setItem("user", "{ invalid JSON }");
+console.log(getUser());
 
 /* Task 7: Check if Object Property Exists
 /*

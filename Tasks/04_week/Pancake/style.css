@@ -119,6 +119,18 @@ body {
   font-family: "Tektur", sans-serif !important;
 }
 
+button #checkoutBtn {
+  display: block; /* Ensures it takes full width */
+  margin: 10px auto; /* Centers the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #cf34ca;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Tektur", sans-serif !important;
+}
 /*modal maddness ???*/
 .modal-open .main {
   /* filter: blur(8px); */

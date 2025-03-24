@@ -32,7 +32,7 @@ Week_05
 
 Week_06
 
-- [ ] little zoo
+- [x] little zoo
 - [x] Objects_01
 - [x] objects_02
 - [ ] objects_03

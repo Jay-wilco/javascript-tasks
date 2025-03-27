@@ -7,6 +7,7 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap");
     </style>
+    <link rel="icon" href="data:,">
   </head>
   <div class="main">
     
@@ -52,7 +53,7 @@
               type="checkbox"
               class="topping"
               data-price="1"
-              value="nuts"
+              value="Nuts"
               />
               Nuts
             </label>
@@ -70,7 +71,7 @@
           type="checkbox"
           class="topping"
           data-price="1"
-          value="syrup"
+          value="Syrup"
           />
           Syrup
         </label>
@@ -78,11 +79,11 @@
         <!-- Extras -->
         <h3>Add extras:</h3>
         <label>
-          <input type="checkbox" class="extra" data-price="2" /> Whipped Cream
+          <input type="checkbox" class="extra"  value="Whipped Cream" data-price="2" /> Whipped Cream
           - 2€</label
           >
           <label
-          ><input type="checkbox" class="extra" data-price="3" /> Ice Cream -
+          ><input type="checkbox" class="extra" value="Ice Cream" data-price="3" /> Ice Cream -
           3€</label
           >
           
@@ -93,6 +94,7 @@
           type="radio"
           name="delivery"
           class="delivery"
+          value="Eat in"
           data-price="0"
           checked
           />
@@ -103,6 +105,7 @@
           type="radio"
           name="delivery"
           class="delivery"
+          value="Take away"
           data-price="0"
           />
           Pick Up</label
@@ -112,6 +115,7 @@
           type="radio"
           name="delivery"
           class="delivery"
+          value="Delivery (+5€)"
           data-price="5"
           />
           Delivery (+5€)</label

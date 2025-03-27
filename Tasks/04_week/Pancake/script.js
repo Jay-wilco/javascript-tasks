@@ -14,7 +14,6 @@ const delivery = document.querySelectorAll(".delivery");
 const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
 const checkoutBtn = document.querySelector("#checkoutBtn");
-const orderId = Date.now();
 
 class Order {
   constructor(
@@ -95,23 +94,26 @@ const changeHandler = (event) => {
     document.getElementById("type").selectedOptions[0].dataset.price
   );
 
+  console.log("Before updates, selectedToppings:", selectedToppings);
+  console.log("Before updates, selectedExtras:", selectedExtras);
+
   toppings.forEach((topping) => {
     if (topping.checked) {
-      selectedToppings.push(topping.textContent.trim());
+      selectedToppings.push(topping.value.trim());
       toppingsTotal += parseFloat(topping.dataset.price);
     }
   });
-
+  console.log("After updates, selectedToppings:", selectedToppings);
   extras.forEach((extra) => {
     if (extra.checked) {
-      selectedExtras.push(extra.textContent.trim());
+      selectedExtras.push(extra.value.trim());
       extrasTotal += parseFloat(extra.dataset.price);
     }
   });
-
+  console.log("After updates, selectedExtras:", selectedExtras);
   delivery.forEach((delivery) => {
     if (delivery.checked) {
-      selectedDelivery.push(delivery.textContent.trim());
+      selectedDelivery.push(delivery.value.trim());
       deliveryTotal += parseFloat(delivery.dataset.price);
     }
   });
@@ -170,6 +172,7 @@ Total price: ${totalPrice} €`;
 // part 3 starts here ,maybe XD ->
 
 makeOrderBtn.addEventListener("click", () => {
+  const orderId = Date.now();
   const {
     basePrice,
     selectedToppings,
@@ -195,11 +198,12 @@ makeOrderBtn.addEventListener("click", () => {
   );
 
   newOrder.saveOrder();
+  window.location.href = "orders.html";
 
   document.getElementById("modalOrderSummary").innerHTML = `
   <h3>Order Summary</h3>
 
-  <p><strong>orderId</strong> ${newOrder.orderId}</p>
+  <p><strong>orderId</strong> ${newOrder.id}</p>
   <p><strong>Name:</strong> ${newOrder.customerName}</p>
   <p><strong>Pancake:</strong> ${newOrder.pancakeType}</p>
   <p><strong>Toppings:</strong> ${
@@ -208,7 +212,9 @@ makeOrderBtn.addEventListener("click", () => {
   <p><strong>Extras:</strong> ${
     newOrder.extras.length ? newOrder.extras.join(", ") : "None"
   }</p>
-  <p><strong>Delivery:</strong> ${newOrder.deliveryMethod || "None"}</p>
+  <p><strong>Delivery:</strong> ${
+    newOrder.deliveryMethod ? newOrder.deliveryMethod : "None"
+  }</p>
   <p><strong>Total Price:</strong> ${newOrder.totalPrice} €</p>
   <button type="button" id="checkoutBtn">Checkout</button>
 `;

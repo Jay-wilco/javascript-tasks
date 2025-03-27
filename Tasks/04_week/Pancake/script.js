@@ -198,7 +198,7 @@ makeOrderBtn.addEventListener("click", () => {
   );
 
   newOrder.saveOrder();
-  window.location.href = "orders.html";
+  // window.location.href = "AllOrders.html";
 
   document.getElementById("modalOrderSummary").innerHTML = `
   <h3>Order Summary</h3>

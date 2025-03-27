@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const ordersContainer = document.getElementById("orders-container");
   const clearOrdersBtn = document.getElementById("clear-orders");
-  // Get orders from localStorage
+  const searchInput = document.getElementById("search");
 
   let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-  const searchInput = document.getElementById("search");
 
   searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
@@ -14,28 +12,28 @@ document.addEventListener("DOMContentLoaded", () => {
         order.customerName.toLowerCase().includes(searchTerm) ||
         order.id.toString().includes(searchTerm)
     );
-    displayOrders(filteredOrders); // Pass the filtered orders to displayOrders
+    displayOrders(filteredOrders);
   });
 
   function displayOrders(filteredOrders = orders) {
-    ordersContainer.innerHTML = ""; // Clear container
+    ordersContainer.innerHTML = "";
 
-    if (orders.length === 0) {
+    if (filteredOrders.length === 0) {
       ordersContainer.innerHTML = "<p>No orders yet.</p>";
       return;
     }
 
-    orders.forEach((order, index) => {
+    filteredOrders.forEach((order, index) => {
       const orderElement = document.createElement("div");
       orderElement.classList.add("order");
 
-      let statusClass = "";
+      let statusStyle = "";
       if (order.status === "waiting") {
-        statusClass = "status-waiting";
+        statusStyle = "color: yellow;";
       } else if (order.status === "ready") {
-        statusClass = "status-ready";
+        statusStyle = "color: blue;";
       } else if (order.status === "delivered") {
-        statusClass = "status-delivered";
+        statusStyle = "color: green;";
       }
 
       orderElement.innerHTML = `
@@ -90,22 +88,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = event.target.dataset.index;
         orders[index].status = event.target.value;
         localStorage.setItem("orders", JSON.stringify(orders));
-        displayOrders(); // Refresh orders
+        displayOrders();
       });
     });
   }
+
   function addRemoveOrderListeners() {
     document.querySelectorAll(".remove-order").forEach((button) => {
       button.addEventListener("click", (event) => {
         const index = event.target.dataset.index;
         if (confirm("Are you sure you want to remove this order?")) {
-          orders.splice(index, 1); // Remove the order from the array
+          orders.splice(index, 1);
           localStorage.setItem("orders", JSON.stringify(orders));
-          displayOrders(); // Refresh orders
+          displayOrders();
         }
       });
     });
   }
+
   clearOrdersBtn.addEventListener("click", () => {
     if (confirm("Are you sure you want to delete all orders?")) {
       localStorage.removeItem("orders");
@@ -115,15 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const sortOrdersBtn = document.getElementById("sort-orders");
-
   sortOrdersBtn.addEventListener("click", () => {
     orders.sort((a, b) => {
       if (a.status === "waiting" && b.status !== "waiting") return -1;
       if (a.status !== "waiting" && b.status === "waiting") return 1;
-      return 0; // No sorting if both have the same status
+      return 0;
     });
-    displayOrders(); // Refresh the orders
+    displayOrders();
   });
 
-  displayOrders(); // Initial load
+  displayOrders();
 });

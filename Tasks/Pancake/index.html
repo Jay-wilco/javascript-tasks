@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pancake Maker</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&display=swap");
+    </style>
+    <link rel="icon" href="data:,">
+  </head>
+  <div class="main">
+     <body class="tektur-body">
+        <div class="container">
+          <div class="image-container">
+            <img src="images/synthwavemansikka.jpg" alt="Delicious pancakes" />
+            <div class="price-banner"><span id="totalPrice">5€</span></div>
+          </div>
+          <button type="button" id="viewOrdersBtn">View Orders</button>
+          <div class="form-container">
+            <h2>Customize Your Pancake</h2>
+            
+            <form id="pancakeForm">
+              
+              <label for="customerName">Your Name:</label>
+              <input
+              type="text"
+              id="customerName"
+              name="customerName"
+              placeholder="Enter your name"
+              />
+              
+              
+              <label for="type">Choose your pancake type:</label>
+              <select id="type" name="pancakeType">
+                <option data-price="5">Classic - 5€</option>
+                <option data-price="6">Chocolate - 6€</option>
+                <option data-price="7">Blueberry - 7€</option>
+              </select>
+              
+              <h3>Select your toppings (1€ each):</h3>
+              <label
+              ><input
+              type="checkbox"
+              class="topping"
+              data-price="1"
+              value="Nuts"
+              />
+              Nuts
+            </label>
+            <label
+            ><input
+            type="checkbox"
+            class="topping"
+            data-price="1"
+            value="Strawberries"
+            />
+            Strawberries
+          </label>
+          <label
+          ><input
+          type="checkbox"
+          class="topping"
+          data-price="1"
+          value="Syrup"
+          />
+          Syrup
+        </label>
+        
+       
+        <h3>Add extras:</h3>
+        <label>
+          <input type="checkbox" class="extra"  value="Whipped Cream" data-price="2" /> Whipped Cream
+          - 2€</label
+          >
+          <label
+          ><input type="checkbox" class="extra" value="Ice Cream" data-price="3" /> Ice Cream -
+          3€</label
+          >
+         <h3>Choose delivery method:</h3>
+          <label
+          ><input
+          type="radio"
+          name="delivery"
+          class="delivery"
+          value="Eat in"
+          data-price="0"
+          checked
+          />
+          Eat In</label
+          >
+          <label
+          ><input
+          type="radio"
+          name="delivery"
+          class="delivery"
+          value="Take away"
+          data-price="0"
+          />
+          Pick Up</label
+          >
+          <label
+          ><input
+          type="radio"
+          name="delivery"
+          class="delivery"
+          value="Delivery (+5€)"
+          data-price="5"
+          />
+          Delivery (+5€)</label
+          >
+          
+          
+          <h3>Total Price: <span id="totalPriceDisplay">5€</span></h3>
+          
+          
+          <button type="button" id="seeOrder">See Order</button>
+        </form>
+        
+       
+        <div id="orderSummary">
+          <h3>Order Summary</h3>
+          <p id="summaryText">Your order details will appear here.</p>
+          <button type="button" id="makeOrder">Confirm your order</button>
+        
+        </div>
+   <div id="myModal" class="modal">
+       
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalOrderSummary">
+              <button type="button" id="checkoutBtn">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+    <script src="script.js"></script>
+    </body>
+</html>

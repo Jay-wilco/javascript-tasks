@@ -28,17 +28,17 @@ week_04
 Week_05
 
 - [x] Arrays 1, 2
-- [ ] pancake pt.2
+- [x] pancake pt.2
 
 Week_06
 
-- [ ] little zoo
-- [ ] objects
+- [x] little zoo
+- [x] objects
 
 Week_07
 
-- [ ] pancake pt.3
-- [ ] JSON
+- [x] pancake pt.3
+- [x] JSON
 - [x] localStorage
 
 Week_08

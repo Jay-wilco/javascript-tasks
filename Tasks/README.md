@@ -39,7 +39,7 @@ Week_06
 
 Week_07
 
-- [ ] pancake pt.3
+- [x] pancake pt.3
 - [x] JSON
 - [x] localStorage
 

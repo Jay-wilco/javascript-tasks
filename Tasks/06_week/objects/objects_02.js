@@ -342,13 +342,30 @@ const cars = [
 ];
 
 const maxHp = () => {
-  cars.forEach;
+  return cars.reduce((maxCar, currentCar) =>
+    currentCar.horsePower > maxCar.horsePower ? currentCar : maxCar
+  );
 };
 
-
+console.log(maxHp());
 /* Task 15
 Create an array of `airports`, where each airport has `name`, `country`, and `flightsPerDay`.
 Write a function that finds the airport with the most daily flights.
 */
 
 // Your code here
+
+const airports = [
+  { name: "Helsinki-Vantaa", country: "Finland", flightsPerDay: "40" },
+  { name: "Heathrow", country: "England", flightsPerDay: "130" },
+  { name: "Guarulhos International", country: "Brasil", flightsPerDay: "75" },
+  { name: "Arlanda", country: "Sweden", flightsPerDay: "47" },
+];
+const mostFlights = (airports) => {
+  return airports.reduce((max, airport) =>
+    Number(airport.flightsPerDay) > Number(max.flightsPerDay) ? airport : max
+  );
+};
+
+const busiestAirport = mostFlights(airports);
+console.log("Most flights per day: ", busiestAirport);

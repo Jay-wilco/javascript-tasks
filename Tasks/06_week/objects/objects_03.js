@@ -59,7 +59,6 @@ const theme = {
     this.isActive = !this.isActive;
     this.name = this.isActive ? "light" : "dark";
     document.body.className = this.name;
-    console.log(`Theme changed to: ${this.name}`);
   },
 };
 
@@ -159,6 +158,48 @@ Use `fetch` to get weather data from an API and display it in an HTML element.
 */
 
 // Your code here
+const weatherApp = {
+  apiKey: "0100229a510b7527d08bd46517cd862f",
+
+  fetchWeather: function (city) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.apiKey}&units=metric`;
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("City not found");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.displayWeather(data);
+      })
+      .catch((error) => {
+        document.getElementById("weatherDisplay").textContent = error.message;
+      });
+  },
+
+  displayWeather: function (data) {
+    const name = data.name;
+    const temp = data.main.temp;
+    const description = data.weather[0].description;
+    const iconCode = data.weather[0].icon;
+    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+    const weatherDisplay = document.getElementById("weatherDisplay");
+    weatherDisplay.innerHTML = `
+      <h3>🌍 ${name}</h3>
+      <p>🌡️ ${temp}°C</p>
+      <p>☁️ ${description}</p>
+    `;
+  },
+};
+document.getElementById("submit").addEventListener("click", () => {
+  const city = document.getElementById("cityInput").value.trim();
+  if (city) {
+    weatherApp.fetchWeather(city);
+  }
+});
 
 /* Task 8
 Create a constructor function `Car` that takes `brand`, `model`, and `year`.
@@ -195,20 +236,21 @@ const users = [
 ];
 const sortingScore = () => {
   users.sort((a, b) => b.score - a.score);
-  console.log(users);
+  const userList = document.getElementById("userList");
+  userList.innerHTML = "";
 
-  const updatedUsers = users.map((user) => {
+  users.forEach((user) => {
     const li = document.createElement("li");
-
     li.textContent = `${user.name} : ${user.score}`;
 
-    document.body.appendChild(li);
+    userList.appendChild(li);
   });
 };
 
 const sortingBtn = document.getElementById("sortingBtn");
 
 sortingBtn.addEventListener("click", sortingScore);
+
 /* Task 10
 Create an object `shoppingList` with an array `items`.
 Add an input field and button to allow users to add new items to `items` and display the updated list.
@@ -216,12 +258,74 @@ Add an input field and button to allow users to add new items to `items` and dis
 
 // Your code here
 
+const shoppingList = {
+  items: [],
+};
+
+const input = document.getElementById("items");
+const button = document.getElementById("addItemBtn");
+const itemList = document.getElementById("itemList");
+
+const updateList = () => {
+  itemList.innerHTML = "";
+
+  shoppingList.items.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    itemList.appendChild(li);
+  });
+};
+button.addEventListener("click", () => {
+  const newItem = input.value.trim();
+
+  if (newItem !== "") {
+    shoppingList.items.push(newItem);
+    input.value = "";
+    updateList();
+  }
+});
+
 /* Task 11
 Create an array of `posts` where each post has `title`, `content`, and `likes`.
 Add a "Like" button next to each post that increases the `likes` count and updates the display.
 */
 
 // Your code here
+
+const posts = [
+  { title: "post 1", content: "funnystuff", likes: 0 },
+  { title: "post 2", content: "funkystuff", likes: 0 },
+  { title: "post 3", content: "funkysh*t", likes: 0 },
+];
+
+const postList = document.getElementById("postList");
+
+const displayPosts = () => {
+  postList.innerHTML = "";
+
+  posts.forEach((post, index) => {
+    const postItem = document.createElement("li");
+    const postTitle = document.createElement("p");
+    const postContent = document.createElement("p");
+    const postLikes = document.createElement("p");
+    const likeBtn = document.createElement("button");
+
+    likeBtn.textContent = "Like this post";
+
+    likeBtn.addEventListener("click", () => {
+      posts[index].likes++;
+      displayPosts();
+    });
+    postItem.append(postTitle, postContent, postLikes, likeBtn);
+    postList.appendChild(postItem);
+
+    postTitle.textContent = `Title: ${post.title}`;
+    postContent.textContent = `Content: ${post.content}`;
+    postLikes.textContent = `Likes: ${post.likes}`;
+  });
+};
+
+displayPosts();
 
 /* Task 12
 Create a constructor function `Employee` with `name`, `position`, and `salary`.
@@ -231,12 +335,90 @@ Create an employee and increase their salary dynamically.
 
 // Your code here
 
+function Employee(name, position, salary) {
+  this.name = name;
+  this.position = position;
+  this.salary = salary;
+
+  this.increaseSalary = function (percent) {
+    this.salary += (this.salary * percent) / 100;
+    return this.salary;
+  };
+}
+
+const employee = new Employee("Jay", "Garbageman", 1000);
+
+console.log(employee.increaseSalary(10));
+console.log(employee.increaseSalary(20));
+
 /* Task 13
 Create an object `timer` with `seconds` and a method `start()` that counts seconds up.
 Display the timer in an HTML element and update it every second.
 */
 
 // Your code here
+const timer2 = {
+  seconds2: 0,
+  intevalId: null,
+  start: function () {
+    this.intevalId = setInterval(() => {
+      this.seconds2++;
+      document.getElementById("display2").textContent = this.seconds2;
+    }, 1000);
+  },
+};
+document.getElementById("startBtn2").addEventListener("click", () => {
+  timer2.start();
+});
+
+//cool stopwatch that i found from the internet...
+
+const display = document.getElementById("display");
+let timer = null;
+let startTime = 0;
+let elapsedTime = 0;
+let isRunning = false;
+
+function start() {
+  if (!isRunning) {
+    startTime = Date.now() - elapsedTime;
+    timer = setInterval(update, 10);
+    isRunning = true;
+  }
+}
+
+function stop() {
+  if (isRunning) {
+    clearInterval(timer);
+    elapsedTime = Date.now() - startTime;
+    isRunning = false;
+  }
+}
+
+function reset() {
+  clearInterval(timer);
+
+  startTime = 0;
+  elapsedTime = 0;
+  isRunning = false;
+  display.textContent = "00:00:00:00";
+}
+
+function update() {
+  const currentTime = Date.now();
+  elapsedTime = currentTime - startTime;
+  let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+  let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+  let seconds = Math.floor((elapsedTime / 1000) % 60);
+  let milliseconds = Math.floor((elapsedTime % 1000) / 10);
+
+  hours = String(hours).padStart(2, "0");
+  minutes = String(minutes).padStart(2, "0");
+  seconds = String(seconds).padStart(2, "0");
+  milliseconds = String(milliseconds).padStart(2, "0");
+
+  display.textContent = `${hours}:${minutes}:${seconds}:${milliseconds}`;
+}
 
 /* Task 14
 Create a constructor function `Book` that takes `title`, `author`, and `pages`.
@@ -245,6 +427,42 @@ Create a simple book library that allows users to add books via an HTML form and
 
 // Your code here
 
+function Book(title, author, pages) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+}
+
+const library = [];
+
+const form = document.getElementById("bookForm");
+const bookList = document.getElementById("bookList");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const title = document.getElementById("title").value.trim();
+  const author = document.getElementById("author").value.trim();
+  const pages = document.getElementById("pages").value.trim();
+
+  if (title && author && pages) {
+    const newBook = new Book(title, author, pages);
+    library.push(newBook);
+    displayBooks();
+    form.reset();
+  }
+});
+
+function displayBooks() {
+  bookList.innerHTML = "";
+
+  library.forEach((book) => {
+    const li = document.createElement("li");
+    li.textContent = `${book.title} by ${book.author}, pages: ${book.pages}`;
+    bookList.appendChild(li);
+  });
+}
+
 /* Task 15
 Create an object `foxTracker` with a `foxes` array.
 Add an input field and button that allows users to add new foxes (with name and location) to the array.
@@ -252,3 +470,36 @@ Display the list of foxes dynamically in an HTML element.
 */
 
 // Your code here
+
+foxTracker = {
+  foxes: [],
+  addFox: function (name, location) {
+    this.foxes.push({ name, location });
+  },
+};
+const foxName = document.getElementById("foxname");
+const foxLocation = document.getElementById("foxlocation");
+const addFoxBtn = document.getElementById("addfox");
+const foxList = document.getElementById("foxlist");
+
+addFoxBtn.addEventListener("click", () => {
+  const name = foxName.value.trim();
+  const location = foxLocation.value.trim();
+
+  if (name && location) {
+    foxTracker.addFox(name, location);
+    displayFoxes();
+    foxName.value = "";
+    foxLocation.value = "";
+  }
+});
+
+function displayFoxes() {
+  foxList.innerHTML = "";
+
+  foxTracker.foxes.forEach((fox) => {
+    const li = document.createElement("li");
+    li.textContent = `Your favorite 🦊: ${fox.name} has been spotted at ${fox.location}`;
+    foxList.appendChild(li);
+  });
+}
